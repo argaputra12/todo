@@ -48,6 +48,60 @@ export const createTodo = async (req: Request, res: Response): Promise<void> => 
             todos: allTodos
         });
     } catch (error) {
-        throw error;
+        throw res.status(400).json({
+            message: error
+        });
+    }
+}
+
+export const updateTodo = async (req: Request, res: Response): Promise<void> => {
+    const {
+        params: { id },
+        body,
+    } = req;
+
+    if(!id || !body.title || !body.status) {
+        res.status(400).json({
+            message: "Id, Title, or Status are not defined"
+        });
+        return;
+    }
+
+    try {
+        const updateTodo: Todo | null = await TodoModel.findByIdAndUpdate(
+            { _id: id },
+            body
+        );
+        const allTodos: Todo[] = await TodoModel.find();
+        res.status(200).json({
+            message: "Todo updated",
+            updatedTodo: updateTodo,
+            todos: allTodos
+        });
+    } catch (error) {
+        throw res.status(404).json({
+            message: error
+        });
+    }
+
+}
+
+export const deleteTodo = async (req: Request, res: Response): Promise<void> => {
+    const {
+        params: { id },
+    } = req;
+
+    try {
+        const deleteTodo: Todo | null = await TodoModel.findByIdAndRemove(id);
+        const allTodos: Todo[] = await TodoModel.find();
+        res.status(200).json({
+            message: "Todo deleted",
+            deletedTodo: deleteTodo,
+            todos: allTodos
+        });
+    } catch (error) {
+        throw res.status(404).json({
+            message: error
+        });
     }
 }
