@@ -8,7 +8,7 @@ export const getTodos = async (req: Request, res: Response): Promise<void> => {
         const todos: Todo[] = await TodoModel.find();
         res.status(200).json({ todos });
     } catch (error) {
-        throw error;
+        throw res.status(400).json({ message: error});
     }
 }
 
