@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import router from './routes';
+import routes from './routes';
 
 const app = express();
 const PORT = 8080;
@@ -15,18 +15,23 @@ const uri = `mongodb+srv://${MONGODB_ATLAS_USERNAME}:${MONGODB_ATLAS_PASSWORD}@c
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
 app.use(cors());
+app.use(routes);
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello, World!');
+});
 
 mongoose.set('useFindAndModify', false);
 mongoose.connect(uri, options).then(
     () => {
         app.listen(PORT, () => {
-            console.info(`⚡️[server]: Server is running at http://127.0.0.1/${PORT}`);
+            console.info(`⚡️[server]: Server is running at http://127.0.0.1/${PORT} or http://localhost:${PORT}`);
             }
         );
     })
     .catch(error => {
         throw error;
-    });
+});
 
 
 
