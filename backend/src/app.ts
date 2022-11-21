@@ -11,7 +11,7 @@ const {
     MONGODB_ATLAS_PASSWORD,
     MONGODB_ATLAS_DBNAME,
 } = process.env;
-const uri = `mongodb+srv://${MONGODB_ATLAS_USERNAME}:${MONGODB_ATLAS_PASSWORD}@cluster0.ktxtkgg.mongodb.net/${MONGODB_ATLAS_DBNAME}?retryWrites=true&w=majority`
+const uri = `mongodb://${MONGODB_ATLAS_USERNAME}:${MONGODB_ATLAS_PASSWORD}@ac-poygvlp-shard-00-00.ktxtkgg.mongodb.net:27017,ac-poygvlp-shard-00-01.ktxtkgg.mongodb.net:27017,ac-poygvlp-shard-00-02.ktxtkgg.mongodb.net:27017/${MONGODB_ATLAS_DBNAME}?ssl=true&replicaSet=atlas-axrqq9-shard-0&authSource=admin&retryWrites=true&w=majority`
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
 app.use(cors());
