@@ -8,11 +8,11 @@ const jsonParser = bodyParser.json();
 
 router.get("/api/todos", getTodos);
 
-router.get("/api/todos/:id", getTodo);
+router.get("/api/todo/:id", getTodo);
 
 router.post("/api/create-todo", jsonParser, createTodo);
 
-router.put("/api/update-todo/:id", jsonParser,updateTodo);
+router.put("/api/update-todo/:id", jsonParser, updateTodo);
 
 router.delete("/api/delete-todo/:id", jsonParser,deleteTodo);
 

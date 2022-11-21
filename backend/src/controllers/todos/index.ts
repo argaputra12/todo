@@ -25,7 +25,7 @@ export const getTodo = async (req: Request, res: Response): Promise<void> => {
 export const createTodo = async (req: Request, res: Response): Promise<void> => {
     const body = req.body as Pick<Todo, "title" | "description" | "status">;
 
-    if(!body.title || !body.status) {
+    if(!body.title || body.status == null) {
         res.status(400).json({
             message: "Title and Status are required"
         });
