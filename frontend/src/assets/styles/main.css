@@ -10466,6 +10466,10 @@ video {
   height: 100vh;
 }
 
+.h-taskList {
+  height: calc(100vh - 300px);
+}
+
 .text-xs {
   font-size: 0.75rem;
 }
@@ -18915,6 +18919,24 @@ video {
 
 .animate-bounce {
   animation: bounce 1s infinite;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-default {
+  -ms-overflow-style: auto;
+  scrollbar-width: auto;
+}
+
+.scrollbar-default::-webkit-scrollbar {
+  display: block;
 }
 
 @media (min-width: 640px) {
@@ -28807,6 +28829,10 @@ video {
     height: 100vh;
   }
 
+  .sm\:h-taskList {
+    height: calc(100vh - 300px);
+  }
+
   .sm\:text-xs {
     font-size: 0.75rem;
   }
@@ -37225,6 +37251,24 @@ video {
 
   .sm\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .sm\:scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .sm\:scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sm\:scrollbar-default {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+
+  .sm\:scrollbar-default::-webkit-scrollbar {
+    display: block;
   }
 }
 
@@ -47118,6 +47162,10 @@ video {
     height: 100vh;
   }
 
+  .md\:h-taskList {
+    height: calc(100vh - 300px);
+  }
+
   .md\:text-xs {
     font-size: 0.75rem;
   }
@@ -55536,6 +55584,24 @@ video {
 
   .md\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .md\:scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .md\:scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .md\:scrollbar-default {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+
+  .md\:scrollbar-default::-webkit-scrollbar {
+    display: block;
   }
 }
 
@@ -65429,6 +65495,10 @@ video {
     height: 100vh;
   }
 
+  .lg\:h-taskList {
+    height: calc(100vh - 300px);
+  }
+
   .lg\:text-xs {
     font-size: 0.75rem;
   }
@@ -73847,6 +73917,24 @@ video {
 
   .lg\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .lg\:scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .lg\:scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lg\:scrollbar-default {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+
+  .lg\:scrollbar-default::-webkit-scrollbar {
+    display: block;
   }
 }
 
@@ -83740,6 +83828,10 @@ video {
     height: 100vh;
   }
 
+  .xl\:h-taskList {
+    height: calc(100vh - 300px);
+  }
+
   .xl\:text-xs {
     font-size: 0.75rem;
   }
@@ -92158,5 +92250,23 @@ video {
 
   .xl\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .xl\:scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .xl\:scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .xl\:scrollbar-default {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+
+  .xl\:scrollbar-default::-webkit-scrollbar {
+    display: block;
   }
 }

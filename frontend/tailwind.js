@@ -1,3 +1,5 @@
+const { callbackify } = require("util");
+
 module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
@@ -297,6 +299,7 @@ module.exports = {
       ...theme('spacing'),
       full: '100%',
       screen: '100vh',
+      taskList: 'calc(100vh - 300px)',
     }),
     inset: {
       '0': '0',
@@ -784,5 +787,7 @@ module.exports = {
     animation: ['responsive'],
   },
   corePlugins: {},
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
