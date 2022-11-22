@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import { getTodoResult } from "../../types/todos.type";
+import { GetTodo } from "../../types/todos.type";
 
-export const getTodo = async (id: string): Promise<AxiosResponse<getTodoResult>> => {
+export const getTodo = async (id: string): Promise<AxiosResponse<GetTodo>> => {
     try{
-        const response = await axios.get(`http://localhost:8080/api/todos/${id}`);
+        const response = await axios.get(`http://localhost:8080/api/todo/${id}`);
 
-        return response.data;
+        return response;
     } catch (error) {
         throw error;
     }

@@ -60,7 +60,7 @@ export const updateTodo = async (req: Request, res: Response): Promise<void> => 
         body,
     } = req;
 
-    if(!id || !body.title || !body.status) {
+    if(!id || !body.title || body.status == null) {
         res.status(400).json({
             message: "Id, Title, or Status are not defined"
         });

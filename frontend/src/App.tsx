@@ -6,13 +6,14 @@ import Form from 'components/Form';
 
 const App: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
   return(
     <main className='container relative bg-darkPurple mx-auto max-w-lg p-4 box-border min-h-screen'>
       <Header />
       <TaskList />
       <PlusButton />
-      <Form />
+      {/* <Form /> */}
     </main>
   );
 

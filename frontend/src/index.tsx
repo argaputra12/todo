@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import webFontLoader from 'webfontloader';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 
 import 'assets/styles/main.css';
 import App from './App';
@@ -11,4 +12,11 @@ webFontLoader.load({
   },
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <>
+    <ReactQueryCacheProvider queryCache={new QueryCache()}>
+      <App />
+    </ReactQueryCacheProvider>
+  </>
+  , document.getElementById('root')
+);
