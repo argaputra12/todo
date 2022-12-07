@@ -12,9 +12,9 @@ import { deleteTodo } from "api/deleteTodo";
 
 type Props = {
     taskId: string;
-    title: string,
-    description: string
-    status: boolean
+    title: string;
+    description: string;
+    status: "completed" | "incomplete"
 }
 
 const TaskCard: React.FC<Props> = ({title, description, taskId, status}) => {
@@ -52,12 +52,12 @@ const TaskCard: React.FC<Props> = ({title, description, taskId, status}) => {
     }
 
     return (
-        <div className={`flex justify-center items-center relative rounded shadow-lg p-4 mb-2 ${!status ? "bg-white text-darkPurple" : "bg-gray-300 bg-opacity-50"}`} id={taskId}>
+        <div className={`flex justify-center items-center relative rounded shadow-lg p-4 mb-2 ${status == "incomplete" ? "bg-white text-darkPurple" : "bg-gray-300 bg-opacity-50"}`} id={taskId}>
             <div className="flex flex-col items-start flex-1">
-                <p className={`subpixel-antialiased tracking-wide font-bold whitespace-normal truncate ${!status? "" : "line-through"}`}>
+                <p className={`subpixel-antialiased tracking-wide font-bold whitespace-normal truncate ${status == "incomplete" ? "" : "line-through"}`}>
                     {title}
                 </p>
-                <p className={`text-sm text-gray-500 ${!status? "" : "line-through"}`}>
+                <p className={`text-sm text-gray-500 ${status == "incomplete"? "" : "line-through"}`}>
                     {description}
                 </p>
             </div>
@@ -67,7 +67,7 @@ const TaskCard: React.FC<Props> = ({title, description, taskId, status}) => {
                     {isLoading ? (
                         <ClockSvgComponent />
                     ):(
-                        <ChecklistSvgComponent onClick={() => checkTodo(taskId)} className={`w-5 h-5 ${!status? "text-green-600 " : "text-red-400"}`}/>
+                        <ChecklistSvgComponent onClick={() => checkTodo(taskId)} className={`w-5 h-5 ${status == "incomplete"? "text-green-600 " : "text-red-400"}`}/>
                     )}
                 </span>
                 <span className="w-5 h-5 ml-4 text-red-600">

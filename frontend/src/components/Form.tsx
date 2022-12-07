@@ -16,7 +16,7 @@ type Props = {
 type Inputs = {
     title: string;
     description: string;
-    status: boolean;
+    status: string;
 };
 
 const DURATION = 240;
@@ -51,9 +51,23 @@ const overlayTransitionStyles = {
 
 const Form: React.FC<Props> = ({inProp, onClose}) => {
     const { register, handleSubmit, errors, reset } = useForm<Inputs>();
+    const queryCache = useQueryCache();
 
-    const onSubmit = (data:Inputs) => {
-        console.log("data ??", data);
+    const [mutate] = useMutation(createTodo, {
+        onSuccess: () => {
+            queryCache.invalidateQueries('todos');
+            console.log('success');   
+        }
+    });
+
+    const onSubmit = async (data:Inputs): Promise<void> => {
+        try{
+            await mutate(data);
+            reset();
+        }
+        catch(err){
+            throw err;
+        }
     }
 
     const [error, setError] = useState<string>('');
@@ -70,6 +84,21 @@ const Form: React.FC<Props> = ({inProp, onClose}) => {
         }
         
     }, [errors]);   
+
+    console.log("errors ??", errors);
+
+    const placeholderStyle = classnames('text-darkPurple flex-1 bg-transparent outline-none',{
+        'placeholder-red-400': error,
+    })
+
+    const inputStyle = classnames('flex justify-center items-center bg-gray-200 px-3 py-2 rounded-lg box-border mb-2', {
+        'bg-red-200' : error,
+    })
+
+    const handleOnClose = () => {
+        reset();
+        onClose();
+    }
 
     return (
         <Transition in={inProp} timeout={DURATION} mountOnEnter unmountOnExit>
@@ -91,7 +120,7 @@ const Form: React.FC<Props> = ({inProp, onClose}) => {
                             className="flex flex-col"
                             onSubmit={handleSubmit(onSubmit)}
                         >
-                            <div className="flex justify-center items-center bg-gray-200 px-3 py-2 rounded-lg box-border mb-2">
+                            <div className={inputStyle}>
                                 <input 
                                     ref={register({
                                         required: {
@@ -110,10 +139,10 @@ const Form: React.FC<Props> = ({inProp, onClose}) => {
                                     type="text" 
                                     name="title"
                                     placeholder="Title"
-                                    className="text-darkPurple bg-transparent outline-none text-center w-full"
+                                    className={placeholderStyle}
                                     />
                             </div>
-                            <div className="flex justify-center items-center bg-gray-200 px-4 py-2 rounded-lg box-border mb-3">
+                            <div className={inputStyle}>
                                 <input 
                                     ref={register({
                                         required: {
@@ -132,18 +161,34 @@ const Form: React.FC<Props> = ({inProp, onClose}) => {
                                     type="text" 
                                     name="description"
                                     placeholder="Description"
-                                    className="text-darkPurple bg-transparent outline-none text-center w-full"
+                                    className={placeholderStyle}
                                     />
+                                <input className="hidden" ref={register} name="status" defaultValue="incomplete" />
                             </div>
                             {error !== '' && <span className="text-red-500 text-xs font-semibold pl-1 tracking-wide" >{error}</span>}
-                            <input type="hidden" name="status" defaultValue="false" /> 
-                            <input type="submit" value="Add" className="font-bold py-2 bg-green-400 rounded-lg mt-4"/>
+                            {error !== '' ? (
+                                    <button
+                                        onClick={() => {
+                                            reset();
+                                        }}
+                                        type="button"
+                                        className="bg-transparent text-md font-bold text-darkPurple outline-none ml-1 py-2"
+                                    >
+                                        Reset
+                                    </button>
+                                ):(
+                                    <button type="submit" className="font-bold py-2 bg-green-400 rounded-lg mt-4">
+                                        Add
+                                    </button>
+                                )
+                            }
+
                         </form>
 
                         <span
                             className="absolute transform -translate-x-1/2 -translate-y-1/2"
                             style={{ bottom: '10px', left: '50%' }}
-                            onClick={onClose}
+                            onClick={handleOnClose}
                             >
                             <CloseSvgComponent />
                         </span>

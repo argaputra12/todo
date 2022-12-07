@@ -4,7 +4,7 @@ import { Todo } from '../types/todo';
 const todoSchema: Schema = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: false},
-    status: {type: Boolean, required: true},
+    status: {type: String, required: true},
     }, {
     timestamps: true,
     });

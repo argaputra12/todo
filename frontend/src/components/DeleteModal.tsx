@@ -4,7 +4,7 @@ import { Transition } from "react-transition-group";
 
 type Props = {
     inProp: boolean;
-    taskStatus: boolean;
+    taskStatus: "completed" | "incomplete";
     onDelete: () => void;
     onClose: () => void;
 }
@@ -27,8 +27,6 @@ const transitionStyles = {
 
 const DeleteModal: React.FC<Props> = ({ inProp, onDelete, onClose, taskStatus}) => {
 
-
-
     return(
         <Transition in={inProp} timeout={300} >
             {(state) => (
@@ -36,8 +34,8 @@ const DeleteModal: React.FC<Props> = ({ inProp, onDelete, onClose, taskStatus}) 
                     <div className="flex flex-col h-full justify-between">
                         <section className="flex justify-between">
                             <div className="text-darkPurple text-sm subpixel-antialised tracking-wide font-bold whitespace-normal">
-                                {taskStatus ? "Congrats! you have completing the task." : "This task is not completed yet, delete?"}
-                                {taskStatus ?
+                                {taskStatus == "completed" ? "Congrats! you have completing the task." : "This task is not completed yet, delete?"}
+                                {taskStatus == "completed" ?
                                     <p className="text-2xl">
                                         &#128540;
                                     </p> :
@@ -50,10 +48,10 @@ const DeleteModal: React.FC<Props> = ({ inProp, onDelete, onClose, taskStatus}) 
                             <CloseSvgComponent onClick={onClose}/>
                         </section>
                         <button 
-                            className={`text-white text-sm tracking-wide font-bold px-4 py-2 rounded-lg ${taskStatus ? "bg-green-600" : "bg-red-600"}`}
+                            className={`text-white text-sm tracking-wide font-bold px-4 py-2 rounded-lg ${taskStatus == "completed" ? "bg-green-600" : "bg-red-600"}`}
                             onClick={onDelete}
                         >
-                            {taskStatus ? "Delete completed task" : "Delete uncompleted task"}
+                            {taskStatus == "completed" ? "Delete completed task" : "Delete uncompleted task"}
                         </button>
                     </div>
                 </div>

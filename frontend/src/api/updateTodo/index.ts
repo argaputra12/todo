@@ -3,8 +3,8 @@ import { getTodo } from "api/getTodo";
 import { TodoBody } from "../../types/todos.type";
 
 const TodoStatus = {
-    COMPLETED: true,
-    INCOMPLETE: false
+    COMPLETED: "completed",
+    INCOMPLETE: "incomplete"
 }
 
 export const updateTodo = async (id: string): Promise<void> => {

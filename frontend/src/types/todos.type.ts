@@ -2,7 +2,7 @@ interface Todo{
     _id: string;
     title: string;
     description: string;
-    status: boolean;
+    status: "completed" | "incomplete";
     createdAt: string;
     updatedAt: string;
     __v: number;
@@ -19,5 +19,5 @@ export interface GetTodo {
 export interface TodoBody {
     title: string;
     description: string;
-    status?: boolean;
+    status?: string;
 }
