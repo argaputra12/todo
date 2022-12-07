@@ -41,13 +41,12 @@ const TaskCard: React.FC<Props> = ({title, description, taskId, status}) => {
 
     const [showDeleteModal, setShowDeleteModal] = React.useState(false);
 
-    const handleRemoveTodo = (type: 'delete' | 'close') => {
+    const removeTask  = () => {
+        removeTodo(taskId);
+        closeDeleteModal()
+    }
 
-        if (type === 'delete') {
-            removeTodo(taskId);
-            setShowDeleteModal(false);
-        }
-
+    const closeDeleteModal = () => {
         setShowDeleteModal(false);
     }
 
@@ -78,8 +77,8 @@ const TaskCard: React.FC<Props> = ({title, description, taskId, status}) => {
             <DeleteModal
                 inProp={showDeleteModal}
                 taskStatus={status}
-                onDelete={() => handleRemoveTodo('delete')}
-                onClose={() => handleRemoveTodo('close')}
+                onDelete={removeTask}
+                onClose={closeDeleteModal}
             />
         </div>
     )
